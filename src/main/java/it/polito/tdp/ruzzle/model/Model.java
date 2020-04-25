@@ -1,5 +1,6 @@
 package it.polito.tdp.ruzzle.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import it.polito.tdp.ruzzle.db.DizionarioDAO;
@@ -11,6 +12,14 @@ public class Model {
 	private Board board ;
 	private List<String> dizionario ;
 	private StringProperty statusText ;
+	
+	
+	
+	public List<Pos> trovaParola(String parola)
+	{
+		Ricerca ric = new Ricerca();
+		return ric.trovaParola(parola, board);
+	}
 
 	public Model() {
 		this.statusText = new SimpleStringProperty() ;
@@ -43,6 +52,24 @@ public class Model {
 
 	public final void setStatusText(final String statusText) {
 		this.statusTextProperty().set(statusText);
+	}
+
+	public List<String> trovaTutte() {
+		
+		// scorre tutte le parole del dizionario e per ogni valore va a vedere se è contenuta nella matrice o no
+		List<String> tutte = new LinkedList<String>();
+		for(String p : this.dizionario)
+			
+		{
+			if(p.length()>1)
+			{p=p.toUpperCase();
+			
+			if(this.trovaParola(p)!= null)
+			{tutte.add(p);}
+			
+			}
+		}
+		return tutte;
 	}
 	
 

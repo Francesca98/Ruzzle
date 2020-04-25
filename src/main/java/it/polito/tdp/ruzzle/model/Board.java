@@ -16,6 +16,8 @@ import javafx.beans.property.StringProperty;
 public class Board {
 	private List<Pos> positions;
 	private Map<Pos, StringProperty> cells;
+	//StringProperty fanno si che ogni cambiamento della strinza si rifletta 
+	//sull interfaccia grafica, cioè cambia anche il testo del bottone
 
 	private int size;
 

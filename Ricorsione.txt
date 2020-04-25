@@ -1,0 +1,52 @@
+Tutte le parole valide sono quelle che esistono nel dizioario, quindi se vedo una parola che io penso esista vado a vedere se sta nel dizionario
+
+Problema : 
+   Stringa da riconoscere 'parola'
+   Comtemito della Board (che è la nostra matrice)
+   
+     
+ Soluzione parziale :
+    Parte iniziale della parola già riconosciuta 
+    Es : se devo cercare Pippo  la soluzione parziale è composta da P (se p si trova nella matrice),quindi la soluzione parziale è quella parte di parola che è già presente nella matrice
+
+Alla fine della ricerca io voglio sapere dove sono posizionate le parole  che ho trovare (es se voglio illuminare la soluzione trovata)
+
+Soluzione totale :    
+      parola completamente riconosciuta
+      Elenco delle posizioni che servono per comporre la parola completa 
+
+Livello:
+   Numero di caratteri già riconosciuti
+  
+ Condizione terminale :
+   quando raggiungo la lunghezza della parola che stavo cercando  .--> livello = lunghezza parola
+*non è un problema di ottimizzazione quindi appena trovo la soluzione si interrompe la specifica*
+
+Generazione delle soluzioni : 
+     Trovare tutte le posizioni che siano :
+      -adiacenti all'ultima posizione usata
+      -contenenti la lettera 'corretta'
+      -non ancora utilizzate
+      
+ Avvio della ricorsione
+ Faccio partire la ricorsione da una posizione ben specifica se esiste che è quella della prima lettera
+ Livello =1;
+ si parte da una posizione  che contiene la prima lettera della parola da cercare
+ 
+ Strutture dati :
+ -Stringa --> parola da riconoscere colled 'parola'
+ -Livello
+ -Lista<Pos> corrispondente alla sequenza di caselle
+ 
+ 
+ 
+ 
+ ***********ESEMPI*******************
+   if(board.getCellValueProperty(p).get().charAt(0)==  parola.charAt(0) ) 
+			   /*questo metodo restituisce la string property corrispondende alla posizione specificata
+		ma non mi restituisce direttamente una stringa ma una proprietà che la include per ottenere la stringa si deve fare .get -->
+		.get() mi restituisce una stringa ma io voglio convenrtirla in un carattero faccio charAt ecc*/
+		
+		
+		
+			if(!string.matches("[A-Z]*")) vuol dire uno o piu caratteeri che sono diversi da quelli alfabetici

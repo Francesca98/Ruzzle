@@ -2,6 +2,7 @@ package it.polito.tdp.ruzzle;
 
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -90,6 +91,38 @@ public class FXMLController {
 
     @FXML
     void handleProva(ActionEvent event) {
+    	//REFRESH DELL'INTERFACCIA GRAFICA --> SERVE PER SPEGNERE TUTTI QUELLI CHE AVEVI ILLUMINA ALL'INIZIO
+    	for(Button b : letters.values())
+    	{
+    		b.setDefaultButton(false);
+    	}
+    	String parola = this.txtParola.getText();
+    	//eventuali controlli xk una parola valida è di almeno 2 parole
+    	if(parola.length()<=1)
+    	{
+    		this.txtResult.setText("Devi inserire parole di almeno due letteere!");
+    		return;
+    	}
+    	String string = parola.toUpperCase();
+    	//Controllo che ci siano solo caratteri alfabetici
+    	if(!string.matches("[A-Z]*"))
+    	{
+    		this.txtResult.setText("Devi inserire parole con solo caratteri alfabetici !");
+    		return;
+    	}
+    	List<Pos> percorso = model.trovaParola(string);
+    	if(percorso!= null)
+    	{
+    		//Illumino i bottoni corrispondenti alle poszioni del percordo trovto
+    		for(Pos p : percorso)
+    		{
+    			letters.get(p).setDefaultButton(true);
+    		}
+    	}
+    	else
+    	{
+    		this.txtResult.setText("Parola non trovata\n");
+    	}
 
     }
 
@@ -100,6 +133,14 @@ public class FXMLController {
     
     @FXML
     void handleRisolvi(ActionEvent event) {
+    	//prova tutte le parole predenti nel dizionario 
+    	List<String> tutte = model.trovaTutte();
+    	txtResult.clear();
+    	txtResult.appendText("Ho trovato "+ tutte.size() + " soluzioni");
+    	for(String s : tutte)
+    	{
+    		txtResult.appendText(s + "\n");
+    	}
 
     }
 
